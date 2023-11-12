@@ -387,7 +387,7 @@ const addIcons = (text) => {
         }
         // If it's one of the common words, replace it with a small icon
         else if (["treasure", "food", "merchant", "danger"].includes(word)) {
-            return `<img class='icon' src='other-icons/${word}.png'></img>`;
+            return `<img class='small-icon' src='other-icons/${word}.png'></img>`;
         }
         // If it's not in the lists, keep it as is
         return match;
