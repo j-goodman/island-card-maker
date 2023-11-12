@@ -43,6 +43,14 @@ ul {
     font-size: 22px;
 }
 
+.compact .attack-container, .compact .prevent-container, .compact .friend-container, .compact .loot-container {
+    font-size: 18px;
+}
+
+.extra-compact .attack-container, .extra-compact .prevent-container, .extra-compact .friend-container, .extra-compact .loot-container {
+    font-size: 16px;
+}
+
 .loot-container {
     align-self: self-start;
     margin-left: 32px;

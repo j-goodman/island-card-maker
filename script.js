@@ -26,7 +26,7 @@ const processData = (data) => {
             cardObject[cardKeys[i].toLowerCase()] = splitRow[i]
         }
         let cardElement = makeCardElement(cardObject)
-        previewContainer.appendChild(cardElement)
+        // previewContainer.appendChild(cardElement)
     }
 }
 
@@ -332,7 +332,23 @@ const makeCardElement = (data) => {
         mainContent.childNodes[0].classList.add("double-wide")
     }
 
-    return card
+    previewContainer.appendChild(card)
+
+    setTimeout(() => {
+        if (getInnerNodesHeight(card) > getNodeHeight(card)) {
+            console.log("It's bigger!")
+            console.log(data.name)
+            console.log(getInnerNodesHeight(card))
+            console.log(getNodeHeight(card))
+            card.classList.add("compact")
+            setTimeout(() => {
+                if (getInnerNodesHeight(card) > getNodeHeight(card)) {
+                    card.classList.remove("compact")
+                    card.classList.add("extra-compact")
+                }
+            }, 2000)
+        }
+    }, 3000)
 }
 
 const keywordOrder = {
@@ -343,22 +359,33 @@ const sortKeywords = (keywords) => {
     return keywords.sort((firstItem, secondItem) => keywordOrder[firstItem] - keywordOrder[secondItem]);
 }
 
-const addIcons = (text, note) => {
+const addIcons = (text) => {
     const resourceIcons = Object.keys(keywordOrder);
-    const wordRegex = /\b(\w+)\b/g;  // This regex matches whole words
+
+    // Use a regular expression to match words enclosed in square brackets
+    const wordRegex = /\[(\w+)]/g
 
     // Replace words in the text using the regular expression
-    const replacedText = text.replace(wordRegex, (match) => {
-        const word = match.replace(/[.,]/g, ""); // Remove commas and periods
-        if (["merchant", "treasure", "danger", "food"].includes(word)) {
-            return `<img class='${note === "small" ? 'small-icon' : 'icon'}' src='other-icons/${word}.png'></img> `;
-        } else if (resourceIcons.includes(word)) {
-            return `<img class='${note === "small" ? 'medium-icon' : 'icon'}' src='resource-icons/${word}.png'></img> `;
+    const replacedText = text.replace(wordRegex, (match, word) => {
+        // If the word is in the resourceIcons array, replace it with an image
+        if (resourceIcons.includes(word)) {
+            return `<img class='icon' src='resource-icons/${word}.png'></img>`;
         }
-        return match; // If the word is not in the list, return the original word
+        // If it's one of the common words, replace it with a small icon
+        else if (["treasure", "food", "merchant", "danger"].includes(word)) {
+            return `<img class='icon' src='other-icons/${word}.png'></img>`;
+        }
+        // If it's not in the lists, keep it as is
+        return match;
     });
 
-    return replacedText.trim();
+    const boldRegex = /\*[^*]+\*/g
+
+    const newReplacedText = replacedText.replace(boldRegex, (match, word) => {
+        return `<b>${match.slice(1, -1)}</b>`
+    })
+
+    return newReplacedText;
 };
 
 
@@ -432,6 +459,18 @@ let drawCardsToPaper = () => {
     validKeywords = validKeywords.sort((a, b) => {
         return b[1] - a[1]
     })
+}
+
+const getInnerNodesHeight = (node) => {
+    let total = 0
+    for (let childNode of node.childNodes) {
+        total += childNode.getBoundingClientRect().height
+    }
+    return total
+}
+
+const getNodeHeight = (node) => {
+    return node.getBoundingClientRect().height
 }
 
 function boldAttacks(inputString) {
