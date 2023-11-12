@@ -146,11 +146,11 @@ const makeCardElement = (data) => {
         tradeContainer.className = "prevent-container"
         
         let nameBar = document.createElement("div")
-        let merchantIcon = document.createElement("img")
-        merchantIcon.className = "icon"
-        merchantIcon.src = "other-icons/merchant.png"
-        nameBar.innerText += data["trade partners"]
-        nameBar.appendChild(merchantIcon)
+        // let merchantIcon = document.createElement("img")
+        // merchantIcon.className = "icon"
+        // merchantIcon.src = "other-icons/merchant.png"
+        // nameBar.innerText += data["trade partners"]
+        // nameBar.appendChild(merchantIcon)
         tradeContainer.appendChild(nameBar)
     
         let tradeDescription = document.createElement("div")
@@ -262,11 +262,11 @@ const makeCardElement = (data) => {
         tradeContainer.className = "prevent-container"
         
         let nameBar = document.createElement("div")
-        let merchantIcon = document.createElement("img")
-        merchantIcon.className = "icon"
-        merchantIcon.src = "other-icons/merchant.png"
+        // let merchantIcon = document.createElement("img")
+        // merchantIcon.className = "icon"
+        // merchantIcon.src = "other-icons/merchant.png"
         nameBar.innerText += data["secondary trading partner"]
-        nameBar.appendChild(merchantIcon)
+        // nameBar.appendChild(merchantIcon)
         tradeContainer.appendChild(nameBar)
     
         let tradeDescription = document.createElement("div")
@@ -317,18 +317,21 @@ const makeCardElement = (data) => {
         }
     }
 
-    let loot = document.createElement("div")
-    loot.classList.add("card-text")
-    loot.innerHTML = `<b>Loot: ${addIcons(data.loot, "small")}</b>`
-
-    if (attackContainer) {
-        attackContainer.appendChild(loot)
-    } else {
-        let lootContainer = document.createElement("div")
-        lootContainer.className = "loot-container"
-        lootContainer.appendChild(loot)
-        card.appendChild(lootContainer)
+    if (data.loot) {
+        let loot = document.createElement("div")
+        loot.classList.add("card-text")
+        loot.innerHTML = `<b>Loot: ${addIcons(data.loot, "small")}</b>`
+        
+        if (attackContainer) {
+            attackContainer.appendChild(loot)
+        } else {
+            let lootContainer = document.createElement("div")
+            lootContainer.className = "loot-container"
+            lootContainer.appendChild(loot)
+            card.appendChild(lootContainer)
+        }
     }
+
 
     if (
         data["special instructions for the card"] &&
@@ -347,10 +350,13 @@ const makeCardElement = (data) => {
     previewContainer.appendChild(card)
 
     setTimeout(() => {
-        if (getInnerNodesHeight(card) > getNodeHeight(card)) {
+        console.log(data.name)
+        console.log(getInnerNodesHeight(card))
+        console.log(getNodeHeight(card))
+        if (getInnerNodesHeight(card) + 10 > getNodeHeight(card)) {
             card.classList.add("compact")
             setTimeout(() => {
-                if (getInnerNodesHeight(card) > getNodeHeight(card)) {
+                if (getInnerNodesHeight(card) + 10 > getNodeHeight(card)) {
                     card.classList.remove("compact")
                     card.classList.add("extra-compact")
                 }
