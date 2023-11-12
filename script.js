@@ -149,7 +149,7 @@ const makeCardElement = (data) => {
         // let merchantIcon = document.createElement("img")
         // merchantIcon.className = "icon"
         // merchantIcon.src = "other-icons/merchant.png"
-        // nameBar.innerText += data["trade partners"]
+        nameBar.innerText += data["trade partners"]
         // nameBar.appendChild(merchantIcon)
         tradeContainer.appendChild(nameBar)
     
