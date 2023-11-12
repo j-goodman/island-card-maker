@@ -80,6 +80,7 @@ const makeCardElement = (data) => {
         attackContainer.appendChild(attackName)
     
         let attackDamage = document.createElement("div")
+        attackDamage.classList.add("card-text")
         attackDamage.innerHTML = addIcons(data.damage, "small")
         attackContainer.appendChild(attackDamage)
         
@@ -134,6 +135,7 @@ const makeCardElement = (data) => {
         
         if (data["how to resolve"]) {
             let howToResolve = document.createElement("div")
+            howToResolve.classList.add("card-text")
             howToResolve.innerHTML = addIcons(data["how to resolve"], "small")
             attackContainer.appendChild(howToResolve)
         }
@@ -181,6 +183,7 @@ const makeCardElement = (data) => {
     
         if (data["special trades"]) {
             let special = document.createElement("div")
+            special.classList.add("card-text")
             special.innerHTML = `Special Trades: ${addIcons(data["special trades"], "small")}`
             tradeContainer.appendChild(special)
         }
@@ -212,6 +215,7 @@ const makeCardElement = (data) => {
         }
         
         let tunerFee = document.createElement("div")
+        tunerFee.classList.add("card-text")
         tunerFee.innerHTML = `Tuner's Fee: ${addIcons(data["tuner fee"], "small")}`
         tunerContainer.appendChild(tunerFee)
         
@@ -220,6 +224,7 @@ const makeCardElement = (data) => {
                 document.createElement("br")
             )
             let special = document.createElement("div")
+            special.classList.add("card-text")
             special.innerHTML = `Special Tuner Instructions: ${addIcons(data["special instructions for the tuner"])}`
             tunerContainer.appendChild(special)
         }
@@ -245,6 +250,7 @@ const makeCardElement = (data) => {
         )
     
         let healerFee = document.createElement("div")
+        healerFee.classList.add("card-text")
         healerFee.innerHTML = `Healer's Fee: ${addIcons(data["healer fee"], "small")}`
         healerContainer.appendChild(healerFee)
     
@@ -293,6 +299,7 @@ const makeCardElement = (data) => {
     
         if (data["secondary trade offered"]) {
             let special = document.createElement("div")
+            special.classList.add("card-text")
             special.innerHTML = `Special Trades: ${addIcons(data["secondary trade offered"], "small")}`
             tradeContainer.appendChild(special)
         }
@@ -311,6 +318,7 @@ const makeCardElement = (data) => {
     }
 
     let loot = document.createElement("div")
+    loot.classList.add("card-text")
     loot.innerHTML = `<b>Loot: ${addIcons(data.loot, "small")}</b>`
 
     if (attackContainer) {
@@ -340,10 +348,6 @@ const makeCardElement = (data) => {
 
     setTimeout(() => {
         if (getInnerNodesHeight(card) > getNodeHeight(card)) {
-            console.log("It's bigger!")
-            console.log(data.name)
-            console.log(getInnerNodesHeight(card))
-            console.log(getNodeHeight(card))
             card.classList.add("compact")
             setTimeout(() => {
                 if (getInnerNodesHeight(card) > getNodeHeight(card)) {

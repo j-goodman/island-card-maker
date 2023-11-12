@@ -149,11 +149,11 @@ ul {
     transform: none;
 }
 
-/* .attack-container .icon {
+.card-text .icon {
     transform: scale(.95, 1.4) translateY(6px);
     height: 40px;
     width: 60px;
-} */
+}
 
 .weaknesses-container img, .seeking-box .icon {
     padding-left: 8px;
