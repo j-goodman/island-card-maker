@@ -100,7 +100,11 @@ const makeCardElement = (data) => {
             for (let weakness of data.weaknesses.split(", ")) {
                 let icon = document.createElement("img")
                 icon.className = "icon"
-                icon.src = `resource-icons/${weakness}.png`
+                if (weakness === "food" || weakness === "treasure") {
+                    icon.src = `other-icons/${weakness}.png`
+                } else {
+                    icon.src = `resource-icons/${weakness}.png`
+                }
                 weaknessesContainer.appendChild(icon)
             }
             attackContainer.appendChild(weaknessesContainer)
