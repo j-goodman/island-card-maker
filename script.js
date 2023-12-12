@@ -66,7 +66,7 @@ const makeCardElement = (data) => {
         
         if (data["monster description"]) {
             let monsterDescription = document.createElement("div")
-            monsterDescription.innerText = data["monster description"]
+            monsterDescription.innerHTML = addIcons(data["monster description"])
             attackContainer.appendChild(monsterDescription)
         }
 
@@ -94,9 +94,10 @@ const makeCardElement = (data) => {
         
         let weaknessesLabel = document.createElement("div")
         weaknessesLabel.innerText = `Weaknesses:`
-        attackContainer.appendChild(weaknessesLabel)
         
         if (data.weaknesses) {
+            attackContainer.appendChild(weaknessesLabel)
+            
             let weaknessesContainer = document.createElement("div")
             for (let weakness of data.weaknesses.split(", ")) {
                 let icon = document.createElement("img")
@@ -145,16 +146,16 @@ const makeCardElement = (data) => {
         let tradeContainer = document.createElement("div")
         tradeContainer.className = "prevent-container"
         
-        let nameBar = document.createElement("div")
+        let nameBar = document.createElement("b")
         // let merchantIcon = document.createElement("img")
         // merchantIcon.className = "icon"
         // merchantIcon.src = "other-icons/merchant.png"
-        nameBar.innerText += data["trade partners"]
+        nameBar.innerHTML += addIcons(data["trade partners"])
         // nameBar.appendChild(merchantIcon)
         tradeContainer.appendChild(nameBar)
     
         let tradeDescription = document.createElement("div")
-        tradeDescription.innerHTML = data["trade partner description"]
+        tradeDescription.innerHTML = addIcons(data["trade partner description"])
         tradeContainer.appendChild(tradeDescription)
     
         tradeContainer.appendChild(
@@ -184,7 +185,7 @@ const makeCardElement = (data) => {
         if (data["special trades"]) {
             let special = document.createElement("div")
             special.classList.add("card-text")
-            special.innerHTML = `Special Trades: ${addIcons(data["special trades"], "small")}`
+            special.innerHTML = `<b>Special Trades:</b> ${addIcons(data["special trades"], "small")}`
             tradeContainer.appendChild(special)
         }
     
@@ -225,7 +226,7 @@ const makeCardElement = (data) => {
             )
             let special = document.createElement("div")
             special.classList.add("card-text")
-            special.innerHTML = `Special Tuner Instructions: ${addIcons(data["special instructions for the tuner"])}`
+            special.innerHTML = `<b>Special Tuner Instructions:</b> ${addIcons(data["special instructions for the tuner"])}`
             tunerContainer.appendChild(special)
         }
 
@@ -261,7 +262,7 @@ const makeCardElement = (data) => {
         let tradeContainer = document.createElement("div")
         tradeContainer.className = "prevent-container"
         
-        let nameBar = document.createElement("div")
+        let nameBar = document.createElement("b")
         // let merchantIcon = document.createElement("img")
         // merchantIcon.className = "icon"
         // merchantIcon.src = "other-icons/merchant.png"
@@ -336,10 +337,10 @@ const makeCardElement = (data) => {
     if (
         data["special instructions for the card"] &&
         data["special instructions for the card"] !== "\r"
-        ) {
+    ) {
         let special = document.createElement("div")
         special.className = "prevent-container"
-        special.innerHTML = `Special Instructions: ${data["special instructions for the card"]}`
+        special.innerHTML = `<b>Special Instructions:</b> ${addIcons(data["special instructions for the card"])}`
         mainContent.appendChild(special)
     }
 
